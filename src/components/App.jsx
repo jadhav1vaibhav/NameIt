@@ -18,7 +18,31 @@ import SearchBox from './SearchBox/SearchBox';
 class App extends React.Component{
     state={
         headerText: 'Name It!',
+        headerExpanded: true,
     };
+    // older way to intialize object 
+    // constructor(){
+    //     super();
+    //     this.state={
+    //         headerText:'Name It!',
+    //     };
+    // }
+    handleInputChange = (inputText)=>{
+        // if you try to save state inside a normal function in the react component
+        // we will face lot of issues that's why we are using arrow functions 
+        // inside the class component because this keyword is not bound here 
+        // alert("I am called");
+        // console.log("input text is "+inputText);
+        this.setState({
+            // headerExpanded: inputText.length>0 ? false : true
+            // above statement can also be written as 
+            // headerExpanded: !(inputText.length>0) because it just toggles a value
+            // when we have to check wether string is empty or not in JS no need to use
+            // length also the string name itself acts as boolean'
+            headerExpanded: !(inputText)
+            // above expression works fine 
+        });
+    }
     render(){
         return (
             // <div>
@@ -49,8 +73,11 @@ class App extends React.Component{
             //     to child component 
             // </div>
             <div>
-                <Header headTitle={this.state.headerText}/>
-                <SearchBox/>
+                <Header headerExpanded={this.state.headerExpanded} headTitle={this.state.headerText}/> 
+                {/* passing data as props  */}
+                <SearchBox onInputChange={this.handleInputChange}
+                />
+                {/* passing function as props  */}
             </div>
         );
     }
