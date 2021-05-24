@@ -11,7 +11,9 @@ import React from 'react';
 import Header from './header/header.jsx'
 import './App.css';
 import SearchBox from './SearchBox/SearchBox';
+import ResultsContainer from './ResultsContainer/ResultsContainer';
 
+const name=require('@rstacruz/startup-name-generator');
 // date is stored in JS objects which stores data in 
 // the form of key valur pairs 
 // state can be called as variable in JS
@@ -19,6 +21,7 @@ class App extends React.Component{
     state={
         headerText: 'Name It!',
         headerExpanded: true,
+        suggestedNames:[],
     };
     // older way to intialize object 
     // constructor(){
@@ -39,11 +42,13 @@ class App extends React.Component{
             // headerExpanded: !(inputText.length>0) because it just toggles a value
             // when we have to check wether string is empty or not in JS no need to use
             // length also the string name itself acts as boolean'
-            headerExpanded: !(inputText)
+            headerExpanded: !(inputText),
+            suggestedNames : name(inputText),
             // above expression works fine 
         });
     }
     render(){
+        
         return (
             // <div>
             //     <Header/>
@@ -78,6 +83,7 @@ class App extends React.Component{
                 <SearchBox onInputChange={this.handleInputChange}
                 />
                 {/* passing function as props  */}
+                <ResultsContainer suggestedNames={this.state.suggestedNames}/>
             </div>
         );
     }
