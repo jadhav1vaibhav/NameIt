@@ -43,7 +43,7 @@ class App extends React.Component{
             // when we have to check wether string is empty or not in JS no need to use
             // length also the string name itself acts as boolean'
             headerExpanded: !(inputText),
-            suggestedNames : inputText ? name(inputText) : [],
+            suggestedNames : inputText ?name(inputText):[],
             // above expression works fine 
         });
     }
